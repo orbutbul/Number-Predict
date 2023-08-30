@@ -24,4 +24,32 @@ mnist = tf.keras.datasets.mnist
 x_train = tf.keras.utils.normalize(x_train,axis=1)
 x_test = tf.keras.utils.normalize(x_test,axis=1)
 
-# This was all preprocessing, now we cna create the model
+# This was all preprocessing, now we can create the neural net model
+
+
+model = tf.keras.models.Sequential()
+
+# add layers to the model
+model.add(tf.keras.layers.Flatten(input_shape=(28,28)))
+# this flattens the layer, instead of having a grid of 28 by 28 pixels we have one flat line of 784px
+
+# now we add a dense layer, this is the most basic layer, where each neuron is connected to each other neuron in the previous layers
+model.add(tf.keras.layers.Dense(128,activation='relu'))
+# the first parameter is the units for the Neural net layer, these are the amount of neurons in the layer
+# the second parameter 'activation="relu"' refers to the activation function to be usedin the layer 
+    # activation layers differentiate the input data so we can differentiate between the images in this case
+# relu takes the input and re-maps it from its past relationship to where values below the threshold map to zero,
+# inputs above the threshold map to a linear relationship
+
+
+model.add(tf.keras.layers.Dense(128,activation='relu'))
+# the second layer is just to reclassify and differentiate again
+
+
+model.add(tf.keras.layers.Dense(10,activation='softmax'))
+# the last layer is the output layer, this layer will classify all the data into each of their respective digits
+# the unit size of 10 is the amount of possible digits, like how each image could be a number 0-9
+# the softmax activation function makes it so that all neurons add up to 1, this can be interpreted as the confidence the NN has on
+# that image being that certain digit
+    # the softmax function looks like a sigmoid, but its used for multi-class specification, meaning
+    # that each of the neurons compete for the highest confidence value, all of the neurons softmax values add up to 1
