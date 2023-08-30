@@ -53,3 +53,32 @@ model.add(tf.keras.layers.Dense(10,activation='softmax'))
 # that image being that certain digit
     # the softmax function looks like a sigmoid, but its used for multi-class specification, meaning
     # that each of the neurons compete for the highest confidence value, all of the neurons softmax values add up to 1
+
+# now the model has to be compiled
+    # compiling the model involves many different things to make sure that the model processes the data how you want it
+    # the first important part of compiling is the optimization. 
+    # optimization changes the weight of the neurons when they process the data so that data loss does not happen
+
+    # the second part of compiling is the loss function. the function focuses on the error the NN has 
+    # between its predictions and the truth.
+
+    # lastly, we can add things like gpu acceleration or metrics to incorporate parallelism, or get key attributes like
+    # accuracy or precision
+
+model.compile(optimizer='adam',loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+# the adam (Adaptive Moment Estimation) optimizer is used to make sure the data is being classified optimally
+    # adam uses the concept of momentum to speed up the accuracy of the neurons.
+    # it does this by looking at highly changing pieces of information in the loss data set by keeping track of a moving average
+    # the moving average can help adjust the neurons so their parameters are more tuned to classify test data
+    
+    # the gradient descent process is the process of adjusting the weights of the neurons to make them more accurate to data in the future
+    # the concept of momentum helps speed up this process
+
+    # adam also uses an adaptive learning rate on each parameter so that they change or stagnate relative
+    # to their historical gradients
+
+# next is the sparse_categorical_crossentropy function
+    # the function measures the dissimilarity between the true values and the training data
+    # using this specific loss function is important for classification problems
+    # the loss function is in a feedback loop with the optimizer and constantly updates the neurons to make sure they are being updated accordingly
+    
