@@ -7,7 +7,7 @@ def num_to_range(num, inMin, inMax, outMin, outMax):
     return outMin + (float(num - inMin) / float(inMax - inMin) * (outMax- outMin))
 
 
-WIDTH, HEIGHT = 1000, 1000
+WIDTH, HEIGHT = 500, 500
 # set width and height of canvas to be 500
 
 CENTER = WIDTH // 2
@@ -24,6 +24,7 @@ class canvasGUI:
         # set default brush size and width
         self.cnv = Canvas(self.root, width=WIDTH-10,height=HEIGHT-10, bg='white',)
         # now create canvas. set width and height, background and make the self.root area the are you can draw
+
 
         self.cnv.pack() # fits the canvas widget within the main app window/ realizes canvas
 
@@ -44,7 +45,7 @@ class canvasGUI:
         # calls the paint function
         # on release clears previous points and resets
 
-        self.root.mainloop() #makes sure the main ui is on a loop
+        # self.root.mainloop() #makes sure the main ui is on a loop
 
     def paint(self, event):
 
@@ -76,7 +77,7 @@ class canvasGUI:
     def reset(self, event):
         self.roi_image = self.roi_image.crop((self.x_min, self.y_min, self.x_max, self.y_max)) 
         #Sets the bounds of the image to be the bounds of the drawing through cropping
-
+        self.roi_image = self.roi_image.resize([28,28],resample=Image.Resampling.BICUBIC)
         self.roi_image.save("images/roi_image.png") # save image to designated folder
         #  plan on updated system where multiple images can exist until user chooses to flush
 
